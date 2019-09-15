@@ -29,6 +29,9 @@ class BookLCRUDViewSet(viewsets.ModelViewSet):
     serializer_class = BookSerializer
     authentication_classes = [JSONWebTokenAuthentication, ]
 
+    def perform_create(self, serializer):
+        serializer.save(user = self.request.user)
+
     # permission_classes = [IsAuthenticated, ]
     # def get(self, request, *args, **kwargs):
     #     return self.list(request, *args, **kwargs)
