@@ -1,11 +1,33 @@
 from rest_framework import viewsets
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from books.models import Book
 from .serializers import BookSerializer
 # from rest_framework.permissions import IsAuthenticated
 
 class BookLCRUDViewSet(viewsets.ModelViewSet):
+    """
+    retrieve:
+        Return a Book instance.
+
+    list:
+        Return all Books.
+
+    create:
+        Create a new Book.
+
+    delete:
+        Remove an existing Book.
+
+    partial_update:
+        Update one or more fields on an existing Book.
+
+    update:
+        Update a Book.
+    """
+
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    authentication_classes = [JSONWebTokenAuthentication, ]
 
     # permission_classes = [IsAuthenticated, ]
     # def get(self, request, *args, **kwargs):
